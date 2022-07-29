@@ -4,26 +4,153 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dice problem</title>
+    <title>Three Dice</title>
 </head>
 <style>
-    #member-1,#member-2,#member-3{ height: fit-content; width: 100px; border: black 1px solid;}
+    div{
+        height: 20px; width: 100px; border: black 1px solid; margin: 20px;
+        text-align: center;
+    }
+    #winner{
+        height: 50px;
+    }
+
 </style>
 <body>
     <div id="member-1"></div>
     <div id="member-2"></div>
     <div id="member-3"></div>
-    <button id="roll"></button>
-
-    
+    <button id="roll"  onclick="fun_dice()"></button>
+    <div id="winner"></div>
+    <!--  -->
 </body>
 </html>
 <script>
-    let member1=document.querySelector("#mamber-1");
-    let member2=document.querySelector("#mamber-2");
-    let member3=document.querySelector("#mamber-3");
     let btn=document.querySelector("#roll");
-    btn.innerText="Roll the dices"
+    btn.innerText="Roll the dice";
+    // btn.addEventListener("click","fun_dice()")
+    function fun_dice(){
+        let a1=Math.random()
+        let a2=Math.random()
+        let a3=Math.random()
+        let m1=document.querySelector("#member-1")
+        let m2=document.querySelector("#member-2")
+        let m3=document.querySelector("#member-3")
+        let w=document.querySelector("#winner");
+        // w.innerText="vishu"
+        m1.style.border=""
+        m2.style.border=""
+        m3.style.border=""
+
+        m1.innerText=Math.ceil(a1*6); 
+        m2.innerText=Math.ceil(a2*6);  
+        m3.innerText=Math.ceil(a3*6);
+        var t1=m1.innerText=Math.ceil(a1*6); 
+        var t2=m2.innerText=Math.ceil(a2*6);  
+        var t3=m3.innerText=Math.ceil(a3*6);
+        console.log(a1,a2,a3)
+        if(t1>t2 && t2>t3)
+        {
+            w.innerText="member-1"+"\n"+ t1;
+            m1.style.border="green 5px solid"
+            m2.style.border="yellow 5px solid"
+            m3.style.border="red 5px solid"       
+        }
+        else if(t1>t3 && t3>t2)
+        {
+            w.innerText="member-1"+"\n"+ t1;
+            m1.style.border="green 5px solid"
+            m2.style.border="red 5px solid"
+            m3.style.border="yellow 5px solid"   
+        }
+        else if(t2>t1 && t1>t3)
+        {
+            w.innerText="member-2"+"\n"+ t2;
+            m1.style.border="yellow 5px solid"
+            m2.style.border="green 5px solid"
+            m3.style.border="red 5px solid"   
+        }
+        else if(t2>t1 && t3>t1)
+        {
+            w.innerText="member-2"+"\n"+ t2;
+            m1.style.border="red 5px solid"
+            m2.style.border="green 5px solid"
+            m3.style.border="yellow 5px solid"   
+        }
+        else if(t3>t1 && t1>t2)
+        {
+            w.innerText="member-3"+"\n"+ t3;
+            m1.style.border="yellow 5px solid"
+            m2.style.border="red 5px solid"
+            m3.style.border="green 5px solid"   
+        }
+
+
+        else if(t3>t1 && t3>t2)
+        {
+            w.innerText="member-3"+"\n"+ t3;
+            m1.style.border="red 5px solid"
+            m2.style.border="yellow 5px solid"
+            m3.style.border="green 5px solid"   
+        }
+        else if(t1==t2 && t2==t3)
+        {
+            w.innerText="It is draw"+"\n";
+            m1.style.border="blue 5px solid"
+            m2.style.border="blue 5px solid"
+            m3.style.border="blue 5px solid"   
+        }
+
+
+        else if(t1>t2 && t2==t3)
+        {
+            w.innerText="member-1"+"\n"+ t1;
+            m1.style.border="green 5px solid"
+            m2.style.border="blue 5px solid"
+            m3.style.border="blue 5px solid"   
+        }
+        else if(t2>t1 && t1==t3)
+        {
+            w.innerText="member-2"+"\n"+ t2;
+            m1.style.border="blue 5px solid"
+            m2.style.border="green 5px solid"
+            m3.style.border="blue 5px solid"   
+        }
+        else if(t3>t1 && t1==t2)
+        {
+            w.innerText="member-3"+"\n"+ t3;
+            m1.style.border="blue 5px solid"
+            m2.style.border="blue 5px solid"
+            m3.style.border="green 5px solid"   
+        }
+
+        else if(t1<t2 && t2==t3)
+        {
+            w.innerText="member-2 & member-3"+"\n"+ t2+"  &"+t3;
+            m1.style.border="red 5px solid"
+            m2.style.border="blue 5px solid"
+            m3.style.border="blue 5px solid"   
+        }
+        else if(t2<t3 && t1==t3)
+        {
+            w.innerText="member-1 & member-2"+"\n"+ t1+"  &"+t2;
+            m1.style.border="blue 5px solid"
+            m2.style.border="red 5px solid"
+            m3.style.border="blue 5px solid"   
+        }
+        else if(t3<t1 && t1==t2)
+        {
+            w.innerText="member-1 & member-2"+"\n"+ t1+"  &"+t2;
+            m1.style.border="blue 5px solid"
+            m2.style.border="blue 5px solid"
+            m3.style.border="red 5px solid"   
+        }
+        
+
+
+
+
+    }
 
 
 </script>
