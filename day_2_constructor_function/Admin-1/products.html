@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products Page</title>
+</head>
+<style>
+    #grid{
+        display: grid; gap: 50px;
+        grid-template-columns: repeat(4,1fr);
+       
+        border: grey 1px solid;
+    }
+
+</style>
+<body>
+    <div id="grid">
+
+    </div>
+    
+</body>
+</html>
+<script>
+     let database=JSON.parse(localStorage.getItem("Products")) || [];
+     let grid=document.querySelector("#grid");
+    
+     database.forEach(function(ele,i){
+        let cart=document.createElement("div");
+        cart.setAttribute("class","cart");
+        let image=document.createElement("img");
+        image.src=ele.image;
+        image.setAttribute("class","image");
+        let imagediv=document.createElement("div")
+        imagediv.setAttribute("class","imagediv");
+        imagediv.append(image)
+        let name=document.createElement("h3");
+        name.innerText=ele.name;
+        let price=document.createElement("h4");
+        price.innerText="₹"+ele.price;
+        let addbtn=document.createElement("button");
+        addbtn.innerText="Add to cart";
+        addbtn.addEventListener("click",function(){
+            addtocartfun();
+        })
+        let removebtn=document.createElement("button");
+        removebtn.innerText="Remove"
+        removebtn.addEventListener("click",function(){
+            removebtnfun();
+        })
+        let buttondiv=document.createElement("div");
+        buttondiv.setAttribute("class","buttondiv");
+        buttondiv.append(addbtn,removebtn)
+        cart.append(imagediv,name,price,buttondiv)
+        grid.append(cart)
+
+        
+
+
+     })
+
+      database=JSON.parse(localStorage.getItem("Products")) || [];
+     function addtocartfun(ele,i){
+       database.push(ele);
+       localStorage.setItem("Products",JSON.stringify(database))
+     }
+    function removebtnfun(ele,i){
+        // console.log("vishu")
+        let database=JSON.parse(localStorage.getItem("Products")) || [];
+        new_database=database.filter(function(e,index){
+            if(ele!==e)
+            {
+                return index;
+            }
+            localStorage.setItem("Products",JSON.stringify(new_database))
+        })
+
+    }
+
+
+
+</script>
+<style>
+    .cart{
+        border: red 1px solid;
+        height: auto; width: auto;
+    }
+    .imagediv{
+        border: teal 1px solid;
+        height: auto; width: auto;
+
+    }
+    .buttondiv{
+        height: 50px; width: auto; display: flex;
+        border: blue 1px solid;
+        justify-content: space-evenly;
+    }
+</style>

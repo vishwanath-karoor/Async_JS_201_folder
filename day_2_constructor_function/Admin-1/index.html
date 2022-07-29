@@ -8,73 +8,47 @@
 </head>
 <style>
 #container{
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; height: auto; width: 20%; margin: auto; padding: 20px;
-    margin-top: 20px;
-
-}
-#form>input,select{
-    width: max-content; padding: 5px;
+    border: grey 1px solid; width: fit-content; margin: auto;
 }
 #form{
-   /* border: blue 1px solid;  */
-   width:  max-content; height: auto;margin: auto;
-   box-sizing:border-box; resize: vertical;
+    display: block; margin: auto;
+}
+#form>input,#form>select{
+    margin: 10px; padding: 5px;
 }
 </style>
 <body>
     <div id="container">
         <form action="" id="form" >
-            <br> <br>
+            <br>
             <input type="text" name="" id="name" placeholder="Product name">
-            <br>  <br>
+            <br>
             <input type="text" name="" id="category" placeholder="Category">
-            <br> <br>
+            <br>
             <input type="text" name="" id="image" placeholder="Image URL">
-            <br>  <br>
+            <br>
             <input type="number" name="" id="price" placeholder="Price">
-            <br>  <br>
+            <br>
             <select name="" id="gender" aria-placeholder="Select the gender">
-              
                <option value="Male">Gender:Male</option>
                <option value="Female">Gender:Female</option>
                <option value="-">NA</option>
             </select>
-            <br>  <br>
+            <br>
             <select name="" id="sold" aria-placeholder="Product sold">
                 <option value="false">Product sold : false</option>
                 <option value="true">Product sold:true</option> 
              </select>
-             <br>  <br>
+             <br>
             <input type="submit" name="" id="add">
-            <br>  <br>
-           
-    
+            <br>
         </form>
     </div>
-    
 </body>
 </html>
 <script>
-    let database=JSON.parse(localStorage.getItem("Products")) || [];
     let form=document.querySelector("#form");
-    form.addEventListener("submit",formfun)
-    
-   
-    function formfun(event){
-        event.preventDefault();
-        // console.log("vishu")
-        let name=form.name.value;
-        let category=form.category.value;
-        let image=form.image.value
-        let price=form.price.value;
-        let gender=form.gender.value;
-        let sold=form.sold.value;
-        let s=new constructor(name,category,image,price,gender,sold);
-        database.push(s);
-       
-        localStorage.setItem("Products",JSON.stringify(database)); 
-    }
-
+    form.addEventListener("submit",funform);
     function constructor(N,C,I,P,G,S){
         this.name=N
         this.category=C
@@ -83,24 +57,19 @@
         this.gender=G
         this.sold=S
     }
+    function funform(event){
+        event.preventDefault()
+        let name=form.name.value;
+        let category=form.category.value;
+        let image=form.image.value;
+        let price=form.price.value;
+        let gender=form.gender.value;
+        let sold=form.sold.value;
+        let database=JSON.parse(localStorage.getItem("Products")) || [];
+        let s=new constructor(name, category,image,price,gender,sold);
+        database.push(s);
+        localStorage.setItem("Products",JSON.stringify(database));
 
+    }
 </script>
-<!-- Product name
-Category
-Image url
-Price
-Gender (select)
-Sold (boolean value) (by default false)
-Use constructor functions to create object data for the product.
-Add a submit button to add the product.
-Use local storage as a database for the seller.
-Once you add the product it should be added to the database in the form of an array of products. -->
 
-<!-- Product name : - #name
-Category : - #category
-Image Url : - #image
-Price : - #price
-Gender : - #gender
-Sold : - #sold
-Submit button should have Id as #add
-Products should be stored in the local storage with key ‘Products’. -->
