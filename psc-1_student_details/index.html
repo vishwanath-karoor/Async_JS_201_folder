@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student details</title>
+</head>
+<style>
+    #navbar{
+        height: 100px; width: auto; margin-bottom: 50px;
+        background-color: skyblue;
+        display: flex; justify-content: flex-start; align-items: center;
+    }
+    #form{
+        border: grey 1px solid;
+        height: auto; width:20%; margin: auto;
+    }
+    input{
+        padding: 5px;margin: 10px;
+    }
+    #display{
+        display: flex; border: red 1px solid;
+        justify-content: flex-start; align-items: center;
+        height: 20px; width: 50%;
+    }
+
+</style>
+<body>
+    <div id="container">
+        <div id="navbar"> 
+            <div id="display">
+                <div id="nav_batch">Batch:</div>
+                <div id="nav_number">Number of students:</div>
+
+            </div> 
+        </div>
+        <form action="" id="form">
+            <input type="text" name="" id="name" placeholder="Enter your name">
+            <input type="text" name="" id="course" placeholder="Enter the course you are in">
+            <input type="text" name="" id="unit" placeholder="Enter the current unit">
+            <input type="text" name="" id="image" placeholder="Enter the image">
+            <input type="text" name="" id="batch" placeholder="Enter your batch">
+            <br>
+            <input type="submit" name="" id="">
+        </form>        
+        
+    </div>
+    
+</body>
+</html>
+<script>
+  var count=0;
+    let form=document.querySelector("#form");
+    form.addEventListener("submit",formfun);
+    function formfun(event){
+        event.preventDefault()
+        // console.log("x")
+        let name=form.name.value;
+        let course=form.course.value;
+        let unit=form.unit.value;
+        let image=form.image.value;
+        let batch=form.batch.value;
+        let database=JSON.parse(localStorage.getItem("student_details")) || [];
+        let s=new constructor(name,course,unit,image,batch);
+        database.push(s);
+        localStorage.setItem("student_details",JSON.stringify(database));
+        database.forEach(function(ele,i){
+            count++;
+        let nav_batch=document.querySelector("#nav_batch");
+        nav_batch.innerHTML="Batch" +" " +ele.batch +" |";
+        let nav_number=document.querySelector("nav_number");
+        nav_number.innerHTML="Number of students  " + count;
+
+    })
+        
+
+    }
+    function constructor(N,C,U,I,B,D){
+        this.name=N
+        this.course=C
+        this.unit=U
+        this.image=I
+        this.batch=B
+    }
+  
+
+   
+   
+   
+</script>
+<!-- 
+There should be a navbar on every page where the number of 
+students batch wise should be displayed in real time.
+Like:-
+Batch01 - 50 | Batch02 - 60
+Make a dashboard where you can see the list of all students added to the database.
+There should be an option to remove a particular student if needed.
+When removed the student should be removed from the dom as well as the database.
+Keep the removed student in the local storage with key as trash.
+Work on the functionality first, give a good UI to it.
+Submit the GitHUb repo link of your code 
+
+Create a student management system for Masai 
+where you can add students and their details to the database and also can update it.
+Create a home page where there will be a form for accepting the details of students.
+The form will accept name, course, unit, image and batch.
+Once you submit the form the details should be added to your database.
+Use local storage as your database.-->

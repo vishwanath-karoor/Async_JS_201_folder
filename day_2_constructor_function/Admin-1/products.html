@@ -8,11 +8,25 @@
 </head>
 <style>
     #grid{
-        display: grid; gap: 50px;
+        display: grid; gap: 20px;
         grid-template-columns: repeat(4,1fr);
        
         border: grey 1px solid;
     }
+    .cart{
+        height:200px; width: 160px; 
+        border: blue 1px solid;
+    }
+    .imagediv{
+        height: auto; width:auto; 
+        border: red 1px solid;
+    }
+    .image{
+        height: 60%; width:100%;
+    }
+
+
+
 
 </style>
 <body>
@@ -23,77 +37,56 @@
 </body>
 </html>
 <script>
-     let database=JSON.parse(localStorage.getItem("Products")) || [];
-     let grid=document.querySelector("#grid");
-    
-     database.forEach(function(ele,i){
+    let database=JSON.parse(localStorage.getItem("Products")) || [];
+    let grid=document.querySelector("#grid");
+    database.forEach(function(ele,i){
         let cart=document.createElement("div");
         cart.setAttribute("class","cart");
         let image=document.createElement("img");
         image.src=ele.image;
-        image.setAttribute("class","image");
-        let imagediv=document.createElement("div")
-        imagediv.setAttribute("class","imagediv");
+        image.setAttribute("class","image")
+        let imagediv=document.createElement("div");
+        imagediv.setAttribute("class","imagediv")
         imagediv.append(image)
-        let name=document.createElement("h3");
-        name.innerText=ele.name;
-        let price=document.createElement("h4");
-        price.innerText="₹"+ele.price;
-        let addbtn=document.createElement("button");
-        addbtn.innerText="Add to cart";
-        addbtn.addEventListener("click",function(){
+
+        // let name=document.createElement("h1");
+        // name.innerText=ele.name;
+        // let price=document.createElement("h1");
+        // price.innerText="₹"+ele.price;
+        // let miscdiv=document.createElement("div");
+        // miscdiv.setAttribute("class","miscdiv");
+        // miscdiv.append(name, price);
+
+        let addtocart=document.createElement("button");
+        addtocart.innerText="Add to cart";
+        addtocart.addEventListener("click",function(){
             addtocartfun();
+        });
+        let removebutton=document.createElement("button");
+        removebutton.innerText="Remove";
+        removebutton.addEventListener("click",function(){
+            removefun();
+
         })
-        let removebtn=document.createElement("button");
-        removebtn.innerText="Remove"
-        removebtn.addEventListener("click",function(){
-            removebtnfun();
-        })
-        let buttondiv=document.createElement("div");
-        buttondiv.setAttribute("class","buttondiv");
-        buttondiv.append(addbtn,removebtn)
-        cart.append(imagediv,name,price,buttondiv)
+        let addremovediv=document.createElement("div");
+        addremovediv.setAttribute("class","addremovediv")
+        addremovediv.append(addtocart,removebutton)
+
+        cart.append(imagediv,addremovediv);
         grid.append(cart)
 
+    })
+    function addtocartfun(){
+
         
+    }
+    function removefun(){
 
-
-     })
-
-      database=JSON.parse(localStorage.getItem("Products")) || [];
-     function addtocartfun(ele,i){
-       database.push(ele);
-       localStorage.setItem("Products",JSON.stringify(database))
-     }
-    function removebtnfun(ele,i){
-        // console.log("vishu")
-        let database=JSON.parse(localStorage.getItem("Products")) || [];
-        new_database=database.filter(function(e,index){
-            if(ele!==e)
-            {
-                return index;
-            }
-            localStorage.setItem("Products",JSON.stringify(new_database))
-        })
 
     }
-
-
 
 </script>
 <style>
-    .cart{
-        border: red 1px solid;
-        height: auto; width: auto;
-    }
-    .imagediv{
-        border: teal 1px solid;
-        height: auto; width: auto;
 
-    }
-    .buttondiv{
-        height: 50px; width: auto; display: flex;
-        border: blue 1px solid;
-        justify-content: space-evenly;
-    }
 </style>
+
